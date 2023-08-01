@@ -1,0 +1,43 @@
+/*
+ * File:  module.txt
+ * Description: Module framework - module template text for copy to file 'module_name.mod.h'
+ * Author: Askar Azhibaev
+ * Date: February 2021
+ * Copyright (c) 2021-2023  Askar Azhibaev
+ * 
+ * This file is part of C3 extension.
+ * URL: https://azhibaev.com/c3.zip
+ * License: CPOL http://www.codeproject.com/info/cpol10.aspx
+ */
+
+#ifndef MOD_H
+#define MOD_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "common_def.h"
+
+#module 
+
+#struct
+
+#init ()
+
+#include "module.h"
+
+FUNCTION_INLINE int FUNC(name)(T *p)
+{
+	int is_set = 0;
+
+	if (p)
+	{
+	}
+
+	return is_set;
+}
+
+#include "module_undef.h"
+
+#endif	/* MOD_H */
