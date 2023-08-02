@@ -23,28 +23,28 @@
 
 #struct
 unsigned char *p;
-unsigned long long *pa;
-unsigned long long n;
-unsigned long long m;
-unsigned long long i_max;
-unsigned long long n_i;
+unsigned int *pa;
+unsigned int n;
+unsigned int m;
+unsigned int i_max;
+unsigned int n_i;
 first;
 
-#init (unsigned long long n, unsigned long long m)
+#init (unsigned int n, unsigned int m)
 if (!n)
 {
-	n = 100;
+	n = 1000;
 }
 if (!m)
 {
-	m = 100000;
+	m = 1000000;
 }
 p->n = n;
 p->m = m;
 p->p = malloc(n + 1);
 memset(p->p, 0, sizeof(unsigned char) * (n + 1));
-p->pa = malloc(sizeof(unsigned long long) * (m + 1));
-memset(p->pa, 0, sizeof(unsigned long long) * (m + 1));
+p->pa = malloc(sizeof(unsigned int) * (m + 1));
+memset(p->pa, 0, sizeof(unsigned int) * (m + 1));
 
 #free
 if (p->p)
@@ -60,18 +60,18 @@ if (p->pa)
 
 #include "module.h"
 
-FUNCTION_INLINE unsigned long long FUNC(calculate_i)(T *p,
-		unsigned long long prime_i);
+FUNCTION_INLINE unsigned int FUNC(calculate_i)(T *p,
+		unsigned int prime_i);
 
-FUNCTION_INLINE unsigned long long FUNC(first)(T *p)
+FUNCTION_INLINE unsigned int FUNC(first)(T *p)
 {
 	unsigned char *p1 = NULL;
-	unsigned long long n = 0;
-	unsigned long long i = 0;
-	unsigned long long j = 0;
-	unsigned long long m = 0;
-	unsigned long long l = 0;
-	unsigned long long *pa = NULL;
+	unsigned int n = 0;
+	unsigned int i = 0;
+	unsigned int j = 0;
+	unsigned int m = 0;
+	unsigned int l = 0;
+	unsigned int *pa = NULL;
 
 	if (p)
 	{
@@ -81,7 +81,7 @@ FUNCTION_INLINE unsigned long long FUNC(first)(T *p)
 		m = p->m;
 
 		memset(p1, 0, sizeof(unsigned char) * (n + 1));
-		memset(pa, 0, sizeof(unsigned long long) * (m + 1));
+		memset(pa, 0, sizeof(unsigned int) * (m + 1));
 
 		/*
 		   Checks p[i] == 0
@@ -114,10 +114,10 @@ FUNCTION_INLINE unsigned long long FUNC(first)(T *p)
 	return l;
 }
 
-FUNCTION_INLINE unsigned long long FUNC(get_i)(T *p,
-		unsigned long long i)
+FUNCTION_INLINE unsigned int FUNC(get_i)(T *p,
+		unsigned int i)
 {
-	unsigned long long pr = 0;
+	unsigned int pr = 0;
 
 	if (p)
 	{
@@ -152,25 +152,26 @@ FUNCTION_INLINE unsigned long long FUNC(get_i)(T *p,
 /*
 Calculate first i prime
  */
-FUNCTION_INLINE unsigned long long FUNC(calculate_i)(T *p,
-		unsigned long long prime_i)
+FUNCTION_INLINE unsigned int FUNC(calculate_i)(T *p,
+		unsigned int prime_i)
 {
 	unsigned char *p1 = NULL;
-	unsigned long long n = 0;
-	unsigned long long i = 0;
-	unsigned long long j = 0;
-	unsigned long long m = 0;
-	unsigned long long l = 0;
-	unsigned long long o = 0;
-	unsigned long long pr = 0;
-	unsigned long long *pa = NULL;
+	unsigned int n = 0;
+	unsigned int i = 0;
+	unsigned int j = 0;
+	unsigned int m = 0;
+	unsigned int m1 = 0;
+	unsigned int l = 0;
+	unsigned int o = 0;
+	unsigned int pr = 0;
+	unsigned int *pa = NULL;
 
 	if (p)
 	{
 		p1 = p->p;
 		pa = p->pa;
 		n = p->n;
-		m = p->m;
+		m1 = p->m;
 		l = p->i_max;
 		o = p->n_i;
 
@@ -210,7 +211,14 @@ Cross out multiples
 			{
 				if (p1[i] == 0)
 				{
-					pa[l++] = i + o;
+					if (l < m1)
+					{
+						pa[l++] = i + o;
+					}
+					else
+					{
+						break;
+					}
 				}
 			}
 		}

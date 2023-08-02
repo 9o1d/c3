@@ -19,9 +19,9 @@
 int main(int argc, const char *argv[])
 {
 	prime *p = NULL;
-	unsigned long long i = 0;
-	unsigned long long j = 0;
-	unsigned long long m = 0;
+	unsigned int i = 0;
+	unsigned int j = 0;
+	unsigned int m = 0;
 
 	p = prime_create(1);
 
@@ -32,11 +32,11 @@ int main(int argc, const char *argv[])
 	}
 
 	m = atoll(argv[1]);
-	prime_init(p, 0, m < 100 ? 0 : m);
+	prime_init(p, 0, m < 1000 ? 1000 : m);
 	for (i = 0; i <= m; i++)
 	{
 		j = prime_get_i(p, i);
-		printf("p[%lld]=%lld ", i, j);
+		printf("p[%d]=%d ", i, j);
 	}
 	printf("\n");
 
